@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T15:05:01.928Z",
+  "generatedAt": "2026-08-24T15:05:02.576Z",
   "totalEquity": 151.32974225,
   "totalAvailableBalance": 56.94926862,
   "coins": [
@@ -48,32 +48,32 @@
   ],
   "prices": {
     "BTCUSDT": {
-      "price": 79479.5,
+      "price": 79475.6,
       "change24hPct": 2.86
     },
     "ETHUSDT": {
-      "price": 2513.36,
-      "change24hPct": 3.1399999999999997
+      "price": 2513.4,
+      "change24hPct": 3.15
     },
     "SOLUSDT": {
       "price": 96.2,
       "change24hPct": 1.0999999999999999
     },
     "HYPEUSDT": {
-      "price": 79.33,
-      "change24hPct": -0.25
+      "price": 79.31,
+      "change24hPct": -0.27999999999999997
     },
     "SUIUSDT": {
-      "price": 0.8295,
-      "change24hPct": 0.42
+      "price": 0.8289,
+      "change24hPct": 0.25
     },
     "ENAUSDT": {
       "price": 0.16183,
       "change24hPct": -5.970000000000001
     },
     "LINKUSDT": {
-      "price": 11.698,
-      "change24hPct": 1.68
+      "price": 11.695,
+      "change24hPct": 1.6500000000000001
     }
   },
   "openOrdersCount": 0,
