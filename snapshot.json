@@ -1,82 +1,84 @@
 {
-  "generatedAt": "2026-08-24T14:41:03.402Z",
-  "totalEquity": 151.59787589,
-  "totalAvailableBalance": 56.93588416,
+  "generatedAt": "2026-08-24T14:43:46.111Z",
+  "totalEquity": 151.54722785,
+  "totalAvailableBalance": 56.94203531,
   "coins": [
     {
       "coin": "USDT",
       "equity": 56.955135,
       "walletBalance": 56.955135,
-      "usdValue": 56.93588416
+      "usdValue": 56.94203531
     },
     {
       "coin": "BTC",
       "equity": 0.0004432,
       "walletBalance": 0.0004432,
-      "usdValue": 35.28158023
+      "usdValue": 35.27639105
     },
     {
       "coin": "ETH",
       "equity": 0.009982,
       "walletBalance": 0.009982,
-      "usdValue": 25.19402008
+      "usdValue": 25.1728467
     },
     {
       "coin": "SOL",
       "equity": 0.1572165,
       "walletBalance": 0.1572165,
-      "usdValue": 15.16015111
+      "usdValue": 15.15213495
     },
     {
       "coin": "HYPE",
       "equity": 0.0988218,
       "walletBalance": 0.0988218,
-      "usdValue": 7.92841727
+      "usdValue": 7.91913356
     },
     {
       "coin": "SUI",
       "equity": 7.047292,
       "walletBalance": 7.047292,
-      "usdValue": 5.84813888
+      "usdValue": 5.85221926
     },
     {
       "coin": "ENA",
       "equity": 32.24186,
       "walletBalance": 32.24186,
-      "usdValue": 5.24968412
+      "usdValue": 5.23246697
     }
   ],
   "prices": {
     "BTCUSDT": {
-      "price": 79723.9,
-      "change24hPct": 2.93
+      "price": 79585.8,
+      "change24hPct": 3.55
     },
     "ETHUSDT": {
-      "price": 2527.28,
-      "change24hPct": 2.98
+      "price": 2521.68,
+      "change24hPct": 5.0200000000000005
     },
     "SOLUSDT": {
-      "price": 96.53,
-      "change24hPct": 1.18
+      "price": 96.34,
+      "change24hPct": 2.88
     },
     "HYPEUSDT": {
-      "price": 80.33,
-      "change24hPct": 0.22
+      "price": 79.98,
+      "change24hPct": 1.83
     },
     "SUIUSDT": {
-      "price": 0.832,
-      "change24hPct": 0.36
+      "price": 0.8309,
+      "change24hPct": 3.26
     },
     "ENAUSDT": {
-      "price": 0.16283,
-      "change24hPct": -3.91
+      "price": 0.16201,
+      "change24hPct": -2.81
     },
     "LINKUSDT": {
-      "price": 11.75,
-      "change24hPct": 1.4000000000000001
+      "price": 11.753,
+      "change24hPct": 3.88
     }
   },
   "openOrdersCount": 0,
   "openPositionsCount": 0,
-  "alerts": []
+  "alerts": [
+    "ETHUSDT 24h move: 5.02% at 2521.68"
+  ]
 }
