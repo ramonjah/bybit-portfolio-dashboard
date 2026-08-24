@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T15:06:15.322Z",
+  "generatedAt": "2026-08-24T15:06:22.861Z",
   "totalEquity": 151.25465562,
   "totalAvailableBalance": 56.94106708,
   "coins": [
@@ -48,38 +48,38 @@
   ],
   "prices": {
     "BTCUSDT": {
-      "price": 79517.6,
-      "change24hPct": 2.8400000000000003
+      "price": 79548.8,
+      "change24hPct": 2.88
     },
     "ETHUSDT": {
-      "price": 2513.65,
-      "change24hPct": 3
+      "price": 2514.99,
+      "change24hPct": 3.06
     },
     "SOLUSDT": {
-      "price": 96.21,
-      "change24hPct": 0.8699999999999999
+      "price": 96.22,
+      "change24hPct": 0.88
     },
     "HYPEUSDT": {
-      "price": 79.34,
-      "change24hPct": -0.27999999999999997
+      "price": 79.36,
+      "change24hPct": -0.25
     },
     "SUIUSDT": {
-      "price": 0.8285,
-      "change24hPct": 0.1
+      "price": 0.8289,
+      "change24hPct": 0.13999999999999999
     },
     "ENAUSDT": {
-      "price": 0.16233,
-      "change24hPct": -5.949999999999999
+      "price": 0.16227,
+      "change24hPct": -5.9799999999999995
     },
     "LINKUSDT": {
-      "price": 11.664,
-      "change24hPct": 1.24
+      "price": 11.67,
+      "change24hPct": 1.29
     }
   },
   "openOrdersCount": 0,
   "openPositionsCount": 0,
   "alerts": [
-    "ENAUSDT 24h move: -5.95% at 0.16233"
+    "ENAUSDT 24h move: -5.98% at 0.16227"
   ],
   "health": {
     "monitor": "ok",
@@ -87,7 +87,7 @@
     "lastSync": {
       "status": "failed",
       "reason": "auth",
-      "at": "2026-08-24T15:05:56Z"
+      "at": "2026-08-24T15:06:16Z"
     }
   }
 }
