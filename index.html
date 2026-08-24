@@ -443,7 +443,13 @@
             `Snapshot is ${humanAge(age)} \u2014 the local monitor or the GitHub sync has stopped publishing updates.`
           );
         } else if (sync && !syncOk) {
-          setBanner("bad", `Last publish attempt failed: ${syncLabel.replace("Failed \u2014 ", "")}. This page may show older data.`);
+          // A snapshot only reaches this page through a successful push, so a recorded failure
+          // means the automatic publish is broken while the data itself is still current.
+          const cause = syncLabel.replace("Failed \u2014 ", "");
+          setBanner(
+            level === "ok" ? "" : "bad",
+            `Last automatic publish failed: ${cause}. Updates may start lagging.`
+          );
         } else if (level === "warn") {
           setBanner("", `Snapshot is ${humanAge(age)}, behind the ${interval} min schedule.`);
         } else {
