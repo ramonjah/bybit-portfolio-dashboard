@@ -1,93 +1,11 @@
 {
-  "generatedAt": "2026-08-24T15:25:01.835Z",
-  "totalEquity": 151.84004848,
-  "totalAvailableBalance": 56.94123794,
-  "coins": [
-    {
-      "coin": "USDT",
-      "equity": 56.955135,
-      "walletBalance": 56.955135,
-      "usdValue": 56.94123794
-    },
-    {
-      "coin": "BTC",
-      "equity": 0.0004432,
-      "walletBalance": 0.0004432,
-      "usdValue": 35.36260756
-    },
-    {
-      "coin": "ETH",
-      "equity": 0.009982,
-      "walletBalance": 0.009982,
-      "usdValue": 25.2107544
-    },
-    {
-      "coin": "SOL",
-      "equity": 0.1572165,
-      "walletBalance": 0.1572165,
-      "usdValue": 15.29369285
-    },
-    {
-      "coin": "HYPE",
-      "equity": 0.0988218,
-      "walletBalance": 0.0988218,
-      "usdValue": 7.87833755
-    },
-    {
-      "coin": "SUI",
-      "equity": 7.047292,
-      "walletBalance": 7.047292,
-      "usdValue": 5.90744185
-    },
-    {
-      "coin": "ENA",
-      "equity": 32.24186,
-      "walletBalance": 32.24186,
-      "usdValue": 5.24597631
-    }
-  ],
-  "prices": {
-    "BTCUSDT": {
-      "price": 79907,
-      "change24hPct": 3.49
-    },
-    "ETHUSDT": {
-      "price": 2532.09,
-      "change24hPct": 3.9699999999999998
-    },
-    "SOLUSDT": {
-      "price": 97.48,
-      "change24hPct": 2.18
-    },
-    "HYPEUSDT": {
-      "price": 79.89,
-      "change24hPct": 0.6799999999999999
-    },
-    "SUIUSDT": {
-      "price": 0.8395,
-      "change24hPct": 2.07
-    },
-    "ENAUSDT": {
-      "price": 0.16315,
-      "change24hPct": -6.02
-    },
-    "LINKUSDT": {
-      "price": 11.747,
-      "change24hPct": 2.2800000000000002
-    }
+  "format": "bybit-dashboard/aes-gcm-v1",
+  "kdf": {
+    "name": "PBKDF2",
+    "hash": "SHA-256",
+    "iterations": 600000,
+    "salt": "ti9t3AFRvL++R0gZNk2pvg=="
   },
-  "openOrdersCount": 0,
-  "openPositionsCount": 0,
-  "alerts": [
-    "ENAUSDT 24h move: -6.02% at 0.16315"
-  ],
-  "health": {
-    "monitor": "ok",
-    "intervalMinutes": 5,
-    "lastSync": {
-      "status": "ok",
-      "reason": "none",
-      "at": "2026-08-24T15:20:03Z"
-    }
-  }
+  "iv": "5SfhpmgB2jNx4OUM",
+  "data": "MnhZxVrDwrzGYZ62n/+NUfFuBoEYBLQ+PPUrJMZkFVClE/MxRDt4x1SWMSlwzk7SK1UQ/DcYdNbIDofv7/+oN5aXBK8HPODkGdLDPf1cGS1MpPYovjyGzQ4PRYoUTU2GKbbGjkd7GOnKWqsV0ftu6HjZykRZKwV3oqBlK6RHYjqVfaqggEAJDwIuqthrBfqzK0jWcAe3x+yP5VRcKzk0kpUS7crvsYETDs+0p0jN7p2qRpVMi77CL1MTi7KjCoc2kUMubQZzcjgRfHOdGYtD3//hJ3+o3VhYoqYUZdORYZWBiuPkEe/dXgFgtIjTFZQ2/C/2hPjXrd3N7TBQQM3Q7O/hI7H77RH9jMcPI0vu0KFJYv2wr0ZbQCeMKNN49kSTfUcZx+l7X3l5r9wGmQiNHo8zes/m6qrazXpQsgzYDRSsBabLO1Dm3CZbC3Fkfqc+zHSFxucXdomRVKWfsoFQ2nAE5czJcka0r2j8l2q1ZT2rB8ydO9GIymo1qrcRvQX+zg/B+pRukwyzdKp47oJfRlXNJadW7lUV3eXToRAxah/C6W1dsmL7FoVRrRUW7nspCecpiSswOOfYgBDM+MjtfpFLgjUfqoYKkJBY2Mhaf7IL7L54wh16VV7onisYwWMeN9SArY78NGvTIGKMr8qdLuYkUa2+pABUpm9SkvATPh+FgbdV+5xPE8BSF2gHRYwJj8lrYFGrjnwkRuBcj/Q1gq/y+VxlFrmI3VZg24n22nzetd4O6CyALjLh8KMI3Z+nYTPhhKrziUXIwqeHCPbnvCMjYuJvuZLVrH4DYgS40wGkUGd9e+Ol0zrV92PrSjWwuhJNKjMrhLrxgW97m3fuqklGWKJmDScMUFhUhNAPrW2BbA+pBqS1ttqO5bh49W5MB/ygnUMit2Cvn3yVpMkCcta9rgxBTfY1MJBYo9s6RJ4qyIWjHfuTTorXMBmu4xPcVxg/922eGRQzBkoVfdhKKubjJCvm6EkFzecKSzwXadnQHpB0bk0s0mWOcGBCYbtGijWKC+KD0tdAEdsx6PpzscBrjEk7yuugYMO9J78LqeGHFTcbjEVmvsI/xH7WWZd9ISSSzdd9ZDNK5cYOe9HphQE0q5pGv2hZR4kkZVz/VxG9mIcCkAwsA+c//9Yqr4e2XntSa4sBdV875yK2CxogJvbmjEpJt7wHZR9M0xnmIyqvfV5f7KtMjy+4aum7icZbbzPAc0ihriobz1YKefr8u2rKRfJi2c4gqqIvPQPxW8Xj85KDVJOMJhEz1q2utz+Ye3HY8udW7bOg/b5OUSmpsXf7pKZT0y5SzSH1rhL0Y7Y3ZTRnoH72E0WV6n9VknTywRAGPFdCleN5rIWUHDilKih4kouaTssrHYkY+5Cc+SebV+XzMx+Lh6v/XsZ5GfBvBK0EGYHPdicwx/J3V++DICZMta1wLSsJQCYN2gK0KseCYpuiYmsdhaLZyEfPBOnOKR7lAOxbKCP9omvOhS2VvXlj0SpQ4AJAoJyt3RnnNuoakdr21kINTnBJkRYPY9RVUvhqXL7iTZnjlHtxT7/r6BXmPlVgc+sAx4h///3lvePGQgQEEvB+gSnRJzgxMA3YbQrhfRHeNoQr17LmIoGB7BiPDkm0p1i8jwYoLLNYnulj+sKCaCvPuY6XBMenlNC5K570mxGPtMi+BeUjlTP6RUYxM2tI2QIM22i7gHVliQDTtF6bB+w="
 }
