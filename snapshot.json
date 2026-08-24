@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-08-24T14:41:03.402Z",
+  "totalEquity": 151.59787589,
+  "totalAvailableBalance": 56.93588416,
+  "coins": [
+    {
+      "coin": "USDT",
+      "equity": 56.955135,
+      "walletBalance": 56.955135,
+      "usdValue": 56.93588416
+    },
+    {
+      "coin": "BTC",
+      "equity": 0.0004432,
+      "walletBalance": 0.0004432,
+      "usdValue": 35.28158023
+    },
+    {
+      "coin": "ETH",
+      "equity": 0.009982,
+      "walletBalance": 0.009982,
+      "usdValue": 25.19402008
+    },
+    {
+      "coin": "SOL",
+      "equity": 0.1572165,
+      "walletBalance": 0.1572165,
+      "usdValue": 15.16015111
+    },
+    {
+      "coin": "HYPE",
+      "equity": 0.0988218,
+      "walletBalance": 0.0988218,
+      "usdValue": 7.92841727
+    },
+    {
+      "coin": "SUI",
+      "equity": 7.047292,
+      "walletBalance": 7.047292,
+      "usdValue": 5.84813888
+    },
+    {
+      "coin": "ENA",
+      "equity": 32.24186,
+      "walletBalance": 32.24186,
+      "usdValue": 5.24968412
+    }
+  ],
+  "prices": {
+    "BTCUSDT": {
+      "price": 79723.9,
+      "change24hPct": 2.93
+    },
+    "ETHUSDT": {
+      "price": 2527.28,
+      "change24hPct": 2.98
+    },
+    "SOLUSDT": {
+      "price": 96.53,
+      "change24hPct": 1.18
+    },
+    "HYPEUSDT": {
+      "price": 80.33,
+      "change24hPct": 0.22
+    },
+    "SUIUSDT": {
+      "price": 0.832,
+      "change24hPct": 0.36
+    },
+    "ENAUSDT": {
+      "price": 0.16283,
+      "change24hPct": -3.91
+    },
+    "LINKUSDT": {
+      "price": 11.75,
+      "change24hPct": 1.4000000000000001
+    }
+  },
+  "openOrdersCount": 0,
+  "openPositionsCount": 0,
+  "alerts": []
+}

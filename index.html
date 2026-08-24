@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bybit Portfolio</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0d1117;
+        --panel: #151b23;
+        --panel-2: #1f2630;
+        --text: #f3f6fb;
+        --muted: #94a3b8;
+        --line: #2d3746;
+        --green: #39d98a;
+        --red: #ff6b6b;
+        --blue: #6aa9ff;
+        --amber: #f5c451;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, rgba(106, 169, 255, 0.16), transparent 34rem),
+          radial-gradient(circle at top right, rgba(57, 217, 138, 0.1), transparent 28rem),
+          var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0;
+      }
+
+      header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(30px, 4vw, 52px);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: 16px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .updated {
+        color: var(--muted);
+        text-align: right;
+        font-size: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px;
+      }
+
+      .metric,
+      .panel,
+      .asset,
+      .alert {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent), var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .metric {
+        grid-column: span 4;
+        padding: 18px;
+      }
+
+      .metric .label {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
+
+      .metric .value {
+        font-size: 30px;
+        font-weight: 750;
+      }
+
+      .panel {
+        grid-column: span 8;
+        padding: 18px;
+      }
+
+      .panel.side {
+        grid-column: span 4;
+      }
+
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .assets {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 12px;
+      }
+
+      .asset {
+        padding: 14px;
+        background-color: var(--panel-2);
+      }
+
+      .asset-top,
+      .price-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .coin {
+        font-size: 18px;
+        font-weight: 750;
+      }
+
+      .usd {
+        color: var(--blue);
+        font-weight: 700;
+      }
+
+      .qty,
+      .price-row {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 8px;
+      }
+
+      .bar {
+        height: 8px;
+        background: #0f141c;
+        border-radius: 999px;
+        overflow: hidden;
+        margin-top: 12px;
+      }
+
+      .bar span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, var(--blue), var(--green));
+      }
+
+      .prices {
+        display: grid;
+        gap: 10px;
+      }
+
+      .price-row {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .price-row:last-child {
+        border-bottom: 0;
+      }
+
+      .up {
+        color: var(--green);
+      }
+
+      .down {
+        color: var(--red);
+      }
+
+      .alerts {
+        display: grid;
+        gap: 10px;
+      }
+
+      .alert {
+        padding: 12px;
+        border-color: rgba(245, 196, 81, 0.45);
+        color: #ffe1a1;
+      }
+
+      .empty {
+        color: var(--muted);
+      }
+
+      footer {
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 18px;
+      }
+
+      @media (max-width: 840px) {
+        header {
+          display: block;
+        }
+
+        .updated {
+          text-align: left;
+          margin-top: 12px;
+        }
+
+        .metric,
+        .panel,
+        .panel.side {
+          grid-column: 1 / -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>Bybit Portfolio</h1>
+          <h2>Live snapshot from local monitor</h2>
+        </div>
+        <p class="updated" id="updated">Loading...</p>
+      </header>
+
+      <section class="grid">
+        <article class="metric">
+          <p class="label">Total equity</p>
+          <p class="value" id="equity">$0.00</p>
+        </article>
+        <article class="metric">
+          <p class="label">Available USDT</p>
+          <p class="value" id="available">$0.00</p>
+        </article>
+        <article class="metric">
+          <p class="label">Active assets</p>
+          <p class="value" id="assetCount">0</p>
+        </article>
+
+        <article class="panel">
+          <div class="section-title">
+            <h2>Holdings</h2>
+            <span class="empty" id="exposureLabel"></span>
+          </div>
+          <div class="assets" id="assets"></div>
+        </article>
+
+        <article class="panel side">
+          <div class="section-title">
+            <h2>Market Watch</h2>
+          </div>
+          <div class="prices" id="prices"></div>
+        </article>
+
+        <article class="panel">
+          <div class="section-title">
+            <h2>Alerts</h2>
+          </div>
+          <div class="alerts" id="alerts"></div>
+        </article>
+
+        <article class="panel side">
+          <div class="section-title">
+            <h2>Status</h2>
+          </div>
+          <div class="prices">
+            <div class="price-row"><span>Open orders</span><strong id="orders">0</strong></div>
+            <div class="price-row"><span>Futures positions</span><strong id="positions">0</strong></div>
+            <div class="price-row"><span>Auto refresh</span><strong>60s</strong></div>
+          </div>
+        </article>
+      </section>
+
+      <footer>No API keys are stored in this page. Data is generated by the local read-only monitor.</footer>
+    </main>
+
+    <script>
+      const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+      const number = new Intl.NumberFormat("en-US", { maximumFractionDigits: 8 });
+
+      async function loadSnapshot() {
+        const response = await fetch(`snapshot.json?ts=${Date.now()}`, { cache: "no-store" });
+        if (!response.ok) throw new Error("snapshot.json not found");
+        return response.json();
+      }
+
+      function render(snapshot) {
+        document.getElementById("updated").textContent = `Updated ${new Date(snapshot.generatedAt).toLocaleString()}`;
+        document.getElementById("equity").textContent = money.format(snapshot.totalEquity || 0);
+        document.getElementById("available").textContent = money.format(snapshot.totalAvailableBalance || 0);
+        document.getElementById("assetCount").textContent = String((snapshot.coins || []).length);
+        document.getElementById("orders").textContent = String(snapshot.openOrdersCount || 0);
+        document.getElementById("positions").textContent = String(snapshot.openPositionsCount || 0);
+
+        const total = snapshot.totalEquity || 1;
+        document.getElementById("exposureLabel").textContent = `Reserve ${money.format(snapshot.totalAvailableBalance || 0)}`;
+        document.getElementById("assets").innerHTML = (snapshot.coins || [])
+          .map((coin) => {
+            const share = Math.max(0, Math.min(100, (coin.usdValue / total) * 100));
+            return `
+              <div class="asset">
+                <div class="asset-top">
+                  <span class="coin">${coin.coin}</span>
+                  <span class="usd">${money.format(coin.usdValue)}</span>
+                </div>
+                <div class="qty">${number.format(coin.equity)} ${coin.coin}</div>
+                <div class="bar"><span style="width:${share}%"></span></div>
+              </div>
+            `;
+          })
+          .join("");
+
+        document.getElementById("prices").innerHTML = Object.entries(snapshot.prices || {})
+          .map(([symbol, item]) => {
+            const cls = item.change24hPct >= 0 ? "up" : "down";
+            const sign = item.change24hPct >= 0 ? "+" : "";
+            return `
+              <div class="price-row">
+                <span>${symbol}</span>
+                <strong>${item.price} <span class="${cls}">${sign}${item.change24hPct.toFixed(2)}%</span></strong>
+              </div>
+            `;
+          })
+          .join("");
+
+        const alerts = snapshot.alerts || [];
+        document.getElementById("alerts").innerHTML = alerts.length
+          ? alerts.map((alert) => `<div class="alert">${alert}</div>`).join("")
+          : `<p class="empty">No active alerts.</p>`;
+      }
+
+      async function boot() {
+        try {
+          render(await loadSnapshot());
+        } catch (error) {
+          document.getElementById("updated").textContent = error.message;
+        }
+      }
+
+      boot();
+      setInterval(boot, 60000);
+    </script>
+  </body>
+</html>
