@@ -72,6 +72,65 @@
         font-size: 14px;
       }
 
+      .status-line {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--muted);
+        flex: none;
+      }
+
+      .dot.ok {
+        background: var(--green);
+        box-shadow: 0 0 0 3px rgba(57, 217, 138, 0.16);
+      }
+
+      .dot.warn {
+        background: var(--amber);
+        box-shadow: 0 0 0 3px rgba(245, 196, 81, 0.16);
+      }
+
+      .dot.bad {
+        background: var(--red);
+        box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.16);
+      }
+
+      .banner {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: 1px solid rgba(245, 196, 81, 0.35);
+        background: rgba(245, 196, 81, 0.08);
+        color: var(--amber);
+        font-size: 14px;
+      }
+
+      .banner.visible {
+        display: flex;
+      }
+
+      .banner.bad {
+        border-color: rgba(255, 107, 107, 0.35);
+        background: rgba(255, 107, 107, 0.08);
+        color: var(--red);
+      }
+
+      .status-value {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .grid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
@@ -237,8 +296,13 @@
           <h1>Bybit Portfolio</h1>
           <h2>Live snapshot from local monitor</h2>
         </div>
-        <p class="updated" id="updated">Loading...</p>
+        <div class="updated">
+          <p class="status-line"><span class="dot" id="freshnessDot"></span><span id="updated">Loading...</span></p>
+          <p id="age"></p>
+        </div>
       </header>
+
+      <div class="banner" id="banner"></div>
 
       <section class="grid">
         <article class="metric">
@@ -283,6 +347,15 @@
           <div class="prices">
             <div class="price-row"><span>Open orders</span><strong id="orders">0</strong></div>
             <div class="price-row"><span>Futures positions</span><strong id="positions">0</strong></div>
+            <div class="price-row">
+              <span>Data freshness</span>
+              <strong class="status-value"><span class="dot" id="freshnessDotPanel"></span><span id="freshness">&mdash;</span></strong>
+            </div>
+            <div class="price-row">
+              <span>GitHub sync</span>
+              <strong class="status-value"><span class="dot" id="syncDot"></span><span id="sync">&mdash;</span></strong>
+            </div>
+            <div class="price-row"><span>Monitor interval</span><strong id="interval">&mdash;</strong></div>
             <div class="price-row"><span>Auto refresh</span><strong>60s</strong></div>
           </div>
         </article>
@@ -295,6 +368,89 @@
       const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
       const number = new Intl.NumberFormat("en-US", { maximumFractionDigits: 8 });
 
+      const SYNC_LABELS = {
+        none: "OK",
+        auth: "Failed \u2014 GitHub credentials",
+        network: "Failed \u2014 network",
+        rejected: "Failed \u2014 remote conflict",
+        git: "Failed \u2014 git error",
+        monitor: "Failed \u2014 monitor error",
+        unknown: "Failed"
+      };
+
+      function minutesSince(iso) {
+        const at = Date.parse(iso);
+        return Number.isFinite(at) ? (Date.now() - at) / 60000 : null;
+      }
+
+      function humanAge(minutes) {
+        if (minutes === null) return "unknown";
+        if (minutes < 1) return "just now";
+        if (minutes < 60) return `${Math.round(minutes)} min ago`;
+        const hours = minutes / 60;
+        if (hours < 24) return `${hours.toFixed(1)} h ago`;
+        return `${Math.round(hours / 24)} d ago`;
+      }
+
+      function setDot(id, level) {
+        document.getElementById(id).className = `dot ${level}`.trim();
+      }
+
+      function setBanner(level, text) {
+        const banner = document.getElementById("banner");
+        banner.className = level === null ? "banner" : `banner visible ${level}`.trim();
+        banner.textContent = text || "";
+      }
+
+      // The snapshot only reaches this page through a successful push, so a failed sync is
+      // usually invisible online. Staleness of generatedAt is the signal that always works.
+      function renderHealth(snapshot) {
+        const health = snapshot.health || {};
+        const interval = Number(health.intervalMinutes) || 5;
+        const age = minutesSince(snapshot.generatedAt);
+
+        let level = "ok";
+        let label = "Live";
+        if (age === null || age > interval * 4) {
+          level = "bad";
+          label = "Stale";
+        } else if (age > interval * 2) {
+          level = "warn";
+          label = "Delayed";
+        }
+
+        setDot("freshnessDot", level);
+        setDot("freshnessDotPanel", level);
+        document.getElementById("age").textContent = humanAge(age);
+        document.getElementById("freshness").textContent = `${label} \u00b7 ${humanAge(age)}`;
+        document.getElementById("interval").textContent = `${interval} min`;
+
+        const sync = health.lastSync || null;
+        const syncOk = Boolean(sync) && sync.status === "ok";
+        const syncLabel = !sync
+          ? "Unknown"
+          : syncOk
+            ? SYNC_LABELS.none
+            : SYNC_LABELS[sync.reason] || SYNC_LABELS.unknown;
+
+        setDot("syncDot", !sync ? "" : syncOk ? "ok" : "bad");
+        document.getElementById("sync").textContent =
+          sync && sync.at ? `${syncLabel} \u00b7 ${humanAge(minutesSince(sync.at))}` : syncLabel;
+
+        if (level === "bad") {
+          setBanner(
+            "bad",
+            `Snapshot is ${humanAge(age)} \u2014 the local monitor or the GitHub sync has stopped publishing updates.`
+          );
+        } else if (sync && !syncOk) {
+          setBanner("bad", `Last publish attempt failed: ${syncLabel.replace("Failed \u2014 ", "")}. This page may show older data.`);
+        } else if (level === "warn") {
+          setBanner("", `Snapshot is ${humanAge(age)}, behind the ${interval} min schedule.`);
+        } else {
+          setBanner(null, "");
+        }
+      }
+
       async function loadSnapshot() {
         const response = await fetch(`snapshot.json?ts=${Date.now()}`, { cache: "no-store" });
         if (!response.ok) throw new Error("snapshot.json not found");
@@ -303,6 +459,7 @@
 
       function render(snapshot) {
         document.getElementById("updated").textContent = `Updated ${new Date(snapshot.generatedAt).toLocaleString()}`;
+        renderHealth(snapshot);
         document.getElementById("equity").textContent = money.format(snapshot.totalEquity || 0);
         document.getElementById("available").textContent = money.format(snapshot.totalAvailableBalance || 0);
         document.getElementById("assetCount").textContent = String((snapshot.coins || []).length);
@@ -350,7 +507,9 @@
         try {
           render(await loadSnapshot());
         } catch (error) {
-          document.getElementById("updated").textContent = error.message;
+          document.getElementById("updated").textContent = "Snapshot unavailable";
+          setDot("freshnessDot", "bad");
+          setBanner("bad", `Could not load snapshot.json: ${error.message}`);
         }
       }
 

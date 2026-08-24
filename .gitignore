@@ -1,0 +1,10 @@
+# This repo is PUBLIC. Only index.html, snapshot.json, .nojekyll and .github/ belong here.
+.env
+.env.*
+*.rtf
+state.json
+sync-status.json
+notify-state.json
+*.log
+.DS_Store
+node_modules/
